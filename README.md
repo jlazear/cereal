@@ -55,3 +55,14 @@ Example usage:
 	ser = Serial('/dev/tty-USB1')
 	ser.read(1)
 	ser.write('hello\n')
+
+Installation
+------------
+
+Install directly from `github` using `pip` with
+
+    pip install git+git://github.com/jlazear/cereal.git
+
+Or download and extract files and install using `distutils` with
+
+    python setup.py install
