@@ -4,7 +4,7 @@ cereal
 Threaded buffered drop-in replacement for pyserial.Serial.
 
 Docs
-====
+----
 jlazear
 
 6/20/13
