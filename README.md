@@ -6,6 +6,7 @@ Threaded buffered drop-in replacement for pyserial.Serial.
 Docs
 ====
 jlazear
+
 6/20/13
 
 Cereal is a drop-in replacement for the PySerial Serial class that
@@ -41,12 +42,16 @@ is unavailable.
 
 Example usage:
 
-import warnings
-try:
-    from cereal import Cereal as Serial
-except ImportError:
-    warningtext = \
-"cereal module not found. Using serial instead. This will probably\n\
-work, but the cereal module is strongly preferred."
-    warnings.warn(warningtext)
-    from serial import Serial
+	import warnings
+	try:
+	    from cereal import Cereal as Serial
+	except ImportError:
+	    warningtext = ("cereal module not found. Using serial instead. This "
+	                   "will probably\n work, but the cereal module is "
+	                   "strongly preferred.")
+	    warnings.warn(warningtext)
+	    from serial import Serial
+
+	ser = Serial('/dev/tty-USB1')
+	ser.read(1)
+	ser.write('hello\n')
