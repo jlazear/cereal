@@ -216,6 +216,21 @@ class Cereal(threading.Thread):
                 t = time.time()
             return self._read(len(self.buffer))    # Return timeout value
 
+    def _unsafe_read(self, size=1):
+#        self.ser.open()
+        l = len(self.buffer)
+        if l >= size:
+            return self._read(size)
+        t0 = time.time()
+        t = time.time()
+        while (t - t0) <= self.timeout:  # Waiting for data to arrive
+            if l >= size:
+                return self._read(size)
+            l = len(self.buffer)
+            time.sleep(0.01)
+            t = time.time()
+        return self._read(len(self.buffer))    # Return timeout value
+
     def readline(self, size=None, eol='\n'):
         eollen = len(eol)
         with self.bufferlock:
@@ -225,6 +240,8 @@ class Cereal(threading.Thread):
                 index = self.buffer.find(eol)
                 if index != -1:
                     return self.read(index + eollen)
+                else:
+                    time.sleep(.01)
                 t = time.time()
             return ''
 
